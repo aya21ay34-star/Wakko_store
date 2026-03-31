@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WAKOO</title>
+
+<style>
+body {
+    font-family: Arial;
+    margin: 0;
+    background: #f5f5f5;
+}
+
+/* HEADER */
+header {
+    background: #2e7d32;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header img {
+    width: 100px;
+}
+
+/* CONTAINER */
+.container {
+    max-width: 900px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+/* INPUT */
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+/* BUTTON */
+button {
+    background: #2e7d32;
+    color: white;
+    padding: 15px;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+}
+
+/* MOBILE */
+@media (max-width:600px){
+    .container {
+        margin: 10px;
+        padding: 15px;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <img src="logo.png">
+    <h1>WAKOO</h1>
+</header>
+
+<div class="container">
+
+<h2>Formulaire</h2>
+
+<input id="name" placeholder="Nom">
+<input id="phone" placeholder="Téléphone">
+<input id="city" placeholder="Ville">
+
+<select id="buy">
+<option>Intéressé ?</option>
+<option>Oui</option>
+<option>Non</option>
+</select>
+
+<input id="qty" placeholder="Quantité">
+<input id="budget" placeholder="Budget">
+
+<textarea id="avis" placeholder="Votre avis"></textarea>
+
+<button onclick="saveData()">Envoyer</button>
+
+</div>
+
+<script>
+function saveData(){
+    let data = {
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        city: document.getElementById("city").value,
+        buy: document.getElementById("buy").value,
+        qty: document.getElementById("qty").value,
+        budget: document.getElementById("budget").value,
+        avis: document.getElementById("avis").value
+    };
+
+    let allData = JSON.parse(localStorage.getItem("wakooData")) || [];
+    allData.push(data);
+
+    localStorage.setItem("wakooData", JSON.stringify(allData));
+
+    alert("✅ تم تسجيل المعلومات بنجاح");
+
+    document.querySelectorAll("input, textarea").forEach(el => el.value = "");
+}
+</script>
+
+</body>
+</html>
